@@ -25,8 +25,13 @@ B.list_commits_on_file = function(opts)
     finder = git_log_f.content_finder(opts),
     previewer = git_log_p.content_previewer(),
     sorter = config.file_sorter(opts),
-    attach_mappings = function(_, _)
-      actions.select_default:replace(git_log_a.view_web(opts)) -- <CR> action
+    attach_mappings = function(_, map)
+      map("i", "<C-o>", git_log_a.view_blob(opts))
+      map("n", "o", git_log_a.view_blob(opts))
+      map("i", "<C-p>", git_log_a.view_compare(opts))
+      map("n", "p", git_log_a.view_compare(opts))
+      -- <CR> action
+      actions.select_default:replace(git_log_a.view_commit(opts))
 
       return true
     end,
