@@ -28,7 +28,6 @@ A.view_web = function(opts)
     local remote_base = string.gsub(url_base, '^(.-)%.git$', '%1') -- clean .git postfix
 
     if git_remote_url == remote_base or #remote_base <= 0 then
-      vim.notify('fatal: could not open remote url about \'' .. git_remote_url .. '\'', vim.log.levels.ERROR)
       return
     end
 
