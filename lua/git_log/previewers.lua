@@ -1,11 +1,15 @@
 local previewers = require('telescope.previewers')
+local previewer_utils = require('telescope.previewers.utils')
 
 local P = {}
 
-P.content_previewer = function()
-  return previewers.new_termopen_previewer({
+P.content_previewer = function(opts)
+  opts = opts or {}
+  local cwd = opts.cwd or vim.loop.cwd()
+
+  return previewers.new_buffer_previewer({
     title = 'diff changes on commit hash',
-    get_command = function(entry)
+    define_preview = function(self, entry)
       local commit_hash = entry.opts.commit_hash
       local prompt = entry.opts.prompt
       local command = {
@@ -20,7 +24,16 @@ P.content_previewer = function()
         table.insert(command, prompt)
       end
 
-      return command
+      previewer_utils.job_maker(command, self.state.bufnr, {
+        value = entry.value,
+        bufname = self.state.bufname,
+        cwd = cwd,
+        callback = function(bufnr)
+          if vim.api.nvim_buf_is_valid(bufnr) then
+            previewer_utils.regex_highlighter(bufnr, "diff")
+          end
+        end,
+      })
     end,
   })
 end
