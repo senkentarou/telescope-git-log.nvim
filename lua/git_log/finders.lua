@@ -1,5 +1,5 @@
 local finders = require('telescope.finders')
-local utils = require('telescope._extensions.utilities')
+local utils = require('git_log.utilities')
 
 -- private
 local latest_prompt = nil

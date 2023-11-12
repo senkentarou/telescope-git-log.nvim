@@ -1,4 +1,4 @@
-local builtin = require('telescope._extensions.git_log_builtin')
+local builtin = require('git_log.builtin')
 
 return require('telescope').register_extension {
   exports = {

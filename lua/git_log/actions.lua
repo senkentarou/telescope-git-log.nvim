@@ -1,6 +1,6 @@
 local action_state = require('telescope.actions.state')
 
-local utils = require('telescope._extensions.utilities')
+local utils = require('git_log.utilities')
 
 local A = {}
 

@@ -2,10 +2,10 @@ local actions = require('telescope.actions')
 local pickers = require('telescope.pickers')
 local config = require('telescope.config').values
 
-local git_log_a = require('telescope._extensions.git_log_actions')
-local git_log_f = require('telescope._extensions.git_log_finders')
-local git_log_p = require('telescope._extensions.git_log_previewers')
-local utils = require('telescope._extensions.utilities')
+local git_log_a = require('git_log.actions')
+local git_log_f = require('git_log.finders')
+local git_log_p = require('git_log.previewers')
+local utils = require('git_log.utilities')
 
 local B = {}
 
