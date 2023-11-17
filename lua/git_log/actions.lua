@@ -23,16 +23,28 @@ local function git_remote(opts)
   return remote_base
 end
 
+local function copy_to_register(text)
+  vim.fn.setreg("+", text)
+  vim.fn.setreg("*", text)
+  vim.notify('copied url: ' .. text)
+end
+
 local function open_remote(url)
   if vim.fn.executable('open') then
-    -- open remote directly on macos
+    -- open remote directly
     os.execute('open ' .. url)
   else
-    -- copy register
-    vim.fn.setreg("+", url)
-    vim.fn.setreg("*", url)
-    vim.notify('copied url: ' .. url)
+    copy_to_register(url)
   end
+end
+
+A.copy_hash = function()
+  local selection = action_state.get_selected_entry()
+  if selection == nil then
+    return
+  end
+
+  copy_to_register(selection.opts.commit_hash)
 end
 
 A.view_commit = function(opts)

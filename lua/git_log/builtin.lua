@@ -26,10 +26,14 @@ B.list_commits_on_file = function(opts)
     previewer = git_log_p.content_previewer(),
     sorter = config.file_sorter(opts),
     attach_mappings = function(_, map)
-      map("i", "<C-o>", git_log_a.view_blob(opts))
       map("n", "o", git_log_a.view_blob(opts))
-      map("i", "<C-p>", git_log_a.view_compare(opts))
       map("n", "p", git_log_a.view_compare(opts))
+      map("n", "y", git_log_a.copy_hash)
+
+      map("i", "<C-o>", git_log_a.view_blob(opts))
+      map("i", "<C-p>", git_log_a.view_compare(opts))
+      map("i", "<C-y>", git_log_a.copy_hash)
+
       -- <CR> action
       actions.select_default:replace(git_log_a.view_commit(opts))
 
