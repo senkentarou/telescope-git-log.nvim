@@ -24,7 +24,7 @@ local function git_remote(opts)
 end
 
 local function open_remote(url)
-  if vim.fn.has('macunix') then
+  if vim.fn.executable('open') then
     -- open remote directly on macos
     os.execute('open ' .. url)
   else
