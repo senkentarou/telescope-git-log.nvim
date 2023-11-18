@@ -1,9 +1,6 @@
 local finders = require('telescope.finders')
 local utils = require('git_log.utilities')
 
--- private
-local latest_prompt = nil
-
 -- git log --format="%C(auto)%H %as %C(green)--%Creset %s"
 --
 -- ex:
@@ -25,40 +22,27 @@ local entry_marker = function(entry)
       commit_hash = commit_hash,
       date = date,
       message = message,
-      prompt = latest_prompt,
     },
   }
 end
 
--- global
 local F = {}
-
-F.set_latest_prompt = function(value)
-  latest_prompt = value
-end
 
 F.content_finder = function(opts)
   opts = opts or {}
 
-  return finders.new_job(function(prompt)
+  return finders.new_job(function(_)
     local command = {
       'git',
       'log',
       '--format=%C(auto)%H %as %C(green)___%Creset %s',
     }
 
-    if prompt and prompt ~= "" then
-      table.insert(command, "-G")
-      table.insert(command, prompt)
-    end
-
     local current_file = opts.current_file
     if current_file and current_file ~= "" then
       table.insert(command, '--follow')
       table.insert(command, opts.current_file)
     end
-
-    F.set_latest_prompt(prompt)
 
     return vim.tbl_flatten(command)
   end, entry_marker)

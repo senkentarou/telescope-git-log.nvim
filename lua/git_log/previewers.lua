@@ -11,18 +11,12 @@ P.content_previewer = function(opts)
     title = 'diff changes on commit hash',
     define_preview = function(self, entry)
       local commit_hash = entry.opts.commit_hash
-      local prompt = entry.opts.prompt
       local command = {
         'git',
         'diff',
         string.format('%s~', commit_hash),
         commit_hash,
       }
-
-      if prompt and prompt ~= "" then
-        table.insert(command, "-G")
-        table.insert(command, prompt)
-      end
 
       previewer_utils.job_maker(command, self.state.bufnr, {
         value = entry.value,
