@@ -26,7 +26,7 @@ end
 local function copy_to_register(text)
   vim.fn.setreg("+", text)
   vim.fn.setreg("*", text)
-  vim.notify('copied url: ' .. text)
+  vim.notify('copied: ' .. text)
 end
 
 local function open_remote(url)
