@@ -33,6 +33,7 @@ local function open_remote(url)
   if vim.fn.executable('open') then
     -- open remote directly
     os.execute('open ' .. url)
+    vim.notify('opened: ' .. url)
   else
     copy_to_register(url)
   end
