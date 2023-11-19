@@ -26,9 +26,10 @@ telescope.load_extension("git_log")
 :lua require('telescope').extensions.git_log.list_commits_on_file()
 ```
 
-* `commit`: show commit on file (`<CR>`)
+* `copy` add commit hash to register (insert: `<C-y>`, normal: y)
 * `blob`: show blob on file (insert: `<C-o>`, normal: o)
 * `compare` show compare current commit and former one on file (insert: `<C-p>`, normal: p)
+* `commit`: show commit on file (`<CR>`)
 
 
 ## For development
