@@ -1,6 +1,8 @@
 # telescope-git-log
 * This is an integration plugin with [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 
+<img width="1438" alt="" src="https://github.com/senkentarou/telescope-git-log.nvim/assets/12808787/421f15a5-0815-4c32-a38f-54aa6c63ebf8">
+
 ## Installation
 * vim-plug
 ```
