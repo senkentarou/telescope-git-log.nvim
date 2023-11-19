@@ -80,7 +80,7 @@ A.view_blob = function(opts)
       return
     end
 
-    open_remote('https://github.com/' .. remote .. '/blob/' .. selection.opts.commit_hash .. '/' .. opts.current_file)
+    open_remote('https://github.com/' .. remote .. '/blob/' .. selection.opts.commit_hash .. '/' .. selection.opts.file_name)
   end
 end
 

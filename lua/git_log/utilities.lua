@@ -3,10 +3,14 @@ local U = {}
 U.split_string = function(value, separator)
   separator = separator or '%s'
 
+  -- seach former characters of separator (it may be match multiples)
   local t = {}
-  for v in string.gmatch(value, '([^' .. separator .. ']+)') do
+  for v in string.gmatch(value, '(.-)' .. separator) do
     table.insert(t, v)
   end
+  -- search latter characters of separator (it may be match the one)
+  local v = string.match(value, '.+' .. separator .. '(.+)$')
+  table.insert(t, v)
 
   return t
 end
