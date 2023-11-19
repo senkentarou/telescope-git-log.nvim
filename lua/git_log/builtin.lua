@@ -15,13 +15,13 @@ B.list_commits_on_file = function(opts)
   opts.current_file = utils.relative_path(opts.bufnr)
 
   if opts.current_file == '' then
-    vim.notify('there is no current file.')
+    vim.notify('current file is empty.')
     return
   end
 
   pickers.new(opts, {
     results_title = 'commits on ' .. opts.current_file,
-    prompt_title = '<C-y>:copy/<C-o>:blob/<C-p>:compare/<CR>:commit',
+    prompt_title = '<C-y>:copy/<C-o>:blob/<C-p>:compare/<CR>:commit/<C-q>:quit',
     finder = git_log_f.content_finder(opts),
     previewer = git_log_p.content_previewer(),
     sorter = config.file_sorter(opts),
