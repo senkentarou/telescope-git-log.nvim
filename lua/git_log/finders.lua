@@ -1,10 +1,10 @@
 local finders = require('telescope.finders')
 local utils = require('git_log.utilities')
 
--- git log --format="%C(auto)%H %as %C(green)--%Creset %s"
+-- git log --format="%H %as ___ %s"
 --
 -- ex:
--- <commit_hash> <date> -- <message>
+-- <commit_hash> <date> ___ <message>
 local entry_marker = function(entry)
   local splits = utils.split_string(entry, '___')
 
@@ -35,13 +35,13 @@ F.content_finder = function(opts)
     local command = {
       'git',
       'log',
-      '--format=%C(auto)%H %as %C(green)___%Creset %s',
+      '--format=%H %as ___ %s',
     }
 
     local current_file = opts.current_file
     if current_file and current_file ~= "" then
       table.insert(command, '--follow')
-      table.insert(command, opts.current_file)
+      table.insert(command, current_file)
     end
 
     return vim.tbl_flatten(command)
